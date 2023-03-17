@@ -12,7 +12,7 @@ const DOWN = 3;
 const LEFT = 4;
 
 const RSEED = 10;
-const CANVASSIZE = 4800;
+const CANVASSIZE = 1200;
 
 function preload() {
     // path = "tiles";
