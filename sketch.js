@@ -68,7 +68,7 @@ function setup() {
     tiles[17] = new Tile(tileImages[17], [sc2, sn, sn, sc1]);
     tiles[18] = new Tile(tileImages[18], [sn, sc1, sn, sc1]);
     tiles[19] = new Tile(tileImages[19], [sc2, sn, sn, sn]);
-    tiles[20] = new Tile(tileImages[20], [sc1, sn, sn, sn]);
+    tiles[20] = new Tile(tileImages[20], [sn, sc1, sn, sn]);
     tiles[21] = new Tile(tileImages[21], [sn, sn, sn, sn]);
     tiles[22] = new Tile(tileImages[22], [sc2, sc1, sbc1, sb2]);
     tiles[23] = new Tile(tileImages[23], [sc2, sn, sbc1, sb2]);
