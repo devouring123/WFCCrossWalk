@@ -12,10 +12,12 @@ class Tile {
     constructor(img, edges) {
         this.img = img;
         this.edges = edges;
-        this.up = [];
-        this.right = [];
-        this.down = [];
-        this.left = [];
+        // up, right, down, left
+        this.constraint = [[],[],[],[]];
+        // this.up = [];
+        // this.right = [];
+        // this.down = [];
+        // this.left = [];
     }
 
     rotate(num) {
@@ -39,21 +41,10 @@ class Tile {
     analyze(tiles) {
         for(let i = 0; i < tiles.length; i++){
             let tile = tiles[i];
-            // UP
-            if (compareEdge(tile.edges[2], this.edges[0])) {
-                this.up.push(i);
-            }
-            // RIGHT
-            if (compareEdge(tile.edges[3], this.edges[1])) {
-                this.right.push(i);
-            }
-            // DOWN
-            if (compareEdge(tile.edges[0], this.edges[2])) {
-                this.down.push(i);
-            }
-            // LEFT
-            if (compareEdge(tile.edges[1], this.edges[3])) {
-                this.left.push(i);
+            for(let j = 0; j < 4; j++){
+                if (compareEdge(tile.edges[(j + 2) % 4], this.edges[j])) {
+                    this.constraint[j].push(i);
+                }
             }
         }
     }

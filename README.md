@@ -1,5 +1,3 @@
-# WFCCrossWalk
+# WFCTest
 
-Wave Function Collapse CrossWalk Example
-
-Tiling By devouring123
+Circuit Wave Function Collapse Example
