@@ -1,3 +1,3 @@
-# WFCTest
+# WFCCrossWalk
 
-Circuit Wave Function Collapse Example
+CrossWalk Wave Function Collapse Example
