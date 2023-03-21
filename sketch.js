@@ -29,7 +29,7 @@ function preload() {
 
     //
     path = "CrossWalk";
-    for (let i = 0; i < 43; i++) {
+    for (let i = 0; i < 54; i++) {
         tileImages[i] = loadImage(`${path}/${i}.png`);
     }
 }
@@ -50,6 +50,7 @@ function setup() {
     const sb2 = 'CCCCCCCA';
     const sbc1 = 'AACCCCCC';
     const sbc2 = 'CCCCCCAA';
+
     tiles[0] = new Tile(tileImages[0], [sc1, sc1, sc1, sc1]);
     tiles[1] = new Tile(tileImages[1], [sc1, sc1, sc1, sn]);
     tiles[2] = new Tile(tileImages[2], [sc1, sc1, sn, sn]);
@@ -93,8 +94,20 @@ function setup() {
     tiles[40] = new Tile(tileImages[40], [sc1, sbc1, sb, sbc2]);
     tiles[41] = new Tile(tileImages[41], [sn, sbc1, sb, sbc2]);
     tiles[42] = new Tile(tileImages[42], [sb, sb, sb, sb]);
+    tiles[43] = new Tile(tileImages[43], [sc1, sn, sc2, sn]);
+    tiles[44] = new Tile(tileImages[44], [sc2, sc1, sc1, sc1]);
+    tiles[45] = new Tile(tileImages[45], [sc2, sc2, sc1, sc1]);
+    tiles[46] = new Tile(tileImages[46], [sc2, sc2, sc2, sc1]);
+    tiles[47] = new Tile(tileImages[47], [sn, sc1, sc1, sc2]);
+    tiles[48] = new Tile(tileImages[48], [sn, sc1, sc2, sc2]);
+    tiles[49] = new Tile(tileImages[49], [sn, sc2, sc1, sc1]);
+    tiles[50] = new Tile(tileImages[50], [sn, sc2, sc2, sc1]);
+    tiles[51] = new Tile(tileImages[51], [sn, sn, sc1, sc2]);
+    tiles[52] = new Tile(tileImages[52], [sn, sn, sc2, sc1]);
+    tiles[53] = new Tile(tileImages[53], [sc2, sb1, sb, sb2]);
+
     for (let i = 1; i < 4; i++) {
-        for (let j = 0; j < 43; j++) {
+        for (let j = 0; j < 54; j++) {
             tiles.push(tiles[j].rotate(i));
         }
     }
@@ -109,9 +122,12 @@ function setup() {
 }
 
 let cnt = 0;
+let totalCnt = 0;
+let errorCnt = 0;
 let start = new Date();
 
 function startOver() {
+    totalCnt++;
     cnt = 0;
     start = new Date();
     background(128);
@@ -156,7 +172,13 @@ function draw() {
         let end = new Date();
         console.log(end - start);
         console.log("Finish");
+
+        //에러 걸릴때 까지 돌리기
+        start = new Date();
+        cnt = 0;
+        startOver();
     }
+
 
     //Pick cell with least entropy
     let gridCopy = grid.slice();
@@ -179,20 +201,33 @@ function draw() {
     }
     if (stopIndex > 0) gridCopy.splice(stopIndex);
 
+
+    const w = width / DIM;
+    const h = height / DIM;
+
     // 기본 코드
     const cell = random(gridCopy);
     cell.collapsed = true;
     const pick = random(cell.options);
     if (pick === undefined) {
+
+        console.log(cell);
+        fill(0);
+        stroke(255);
+        rect(cell.pos[0] * w, cell.pos[1] * h, w, h);
+
+        errorCnt++;
+        console.log(errorCnt);
+        if(errorCnt >= 100) {
+            noLoop();
+            console.log("totalCnt : " , totalCnt);
+        }
+
         startOver();
-        // noLoop();
         return;
     }
     cell.options = [pick];
-
-    const w = width / DIM;
-    const h = height / DIM;
-    // cell이 픽됐으므로 바로 그리면 됨.
+    // cell의 옵션이 선택됐으므로 바로 그리면 됨.
     image(tiles[cell.options[0]].img, cell.pos[0] * w, cell.pos[1] * h, w, h);
 
     // 일단 붕괴한 거의 주변 타일을 전부 고른다.
