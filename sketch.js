@@ -173,10 +173,10 @@ function draw() {
         console.log(end - start);
         console.log("Finish");
 
-        //에러 걸릴때 까지 돌리기
-        start = new Date();
-        cnt = 0;
-        startOver();
+//         //에러 걸릴때 까지 돌리기
+//         start = new Date();
+//         cnt = 0;
+//         startOver();
     }
 
 
@@ -363,6 +363,6 @@ function draw() {
     // noLoop();
 }
 
-// function mousePressed() {
-//     redraw();
-// }
+function mousePressed() {
+    redraw();
+}
