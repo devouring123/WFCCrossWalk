@@ -364,5 +364,5 @@ function draw() {
 }
 
 function mousePressed() {
-    redraw();
+    startOver();
 }
