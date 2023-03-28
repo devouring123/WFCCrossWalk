@@ -1,33 +1,16 @@
 const tiles = [];
 const tileImages = [];
 
-let grid = [];
-
 const DIM = 20;
-
-const BLANK = 0;
-const UP = 1;
-const RIGHT = 2;
-const DOWN = 3;
-const LEFT = 4;
-
 const RSEED = 10;
 const CANVASSIZE = 1200;
+
 const dx = [0, 1, 0, -1];
 const dy = [-1, 0, 1, 0];
 
+let grid = [];
+
 function preload() {
-    // path = "tiles";
-    // tileImages[0] = loadImage(`${path}/blank.png`);
-    // tileImages[1] = loadImage(`${path}/up.png`);
-
-    // circuit Tile
-    // path = "circuits";
-    // for (let i = 0; i < 13; i++) {
-    //     tileImages[i] = loadImage(`${path}/${i}.png`);
-    // }
-
-    //
     path = "CrossWalk";
     for (let i = 0; i < 54; i++) {
         tileImages[i] = loadImage(`${path}/${i}.png`);
@@ -41,7 +24,7 @@ function setup() {
     // canvas 생성
     createCanvas(CANVASSIZE, CANVASSIZE);
 
-    // New Method
+
     const sc1 = 'ABAAAABA';
     const sc2 = 'AABAABAA';
     const sn = 'AAAAAAAA';
@@ -140,16 +123,6 @@ function startOver() {
 }
 
 function checkValid(options, validOptions) {
-    // for (let i = arr.length - 1; i >= 0; i--) {
-    //     // VALID: [BLANK, RIGHT]
-    //     // ARR : [BLANK, UP, RIGHT, DOWN, LEFT]
-    //     // result in removing UP, DOWN, LEFT
-    //     let element = arr[i];
-    //     if (!valid.includes(element)) {
-    //         arr.splice(i, 1);
-    //     }
-    // }
-
     for (let i = options.length - 1; i >= 0; i--) {
         // VALID: [BLANK, RIGHT]
         // ARR : [BLANK, UP, RIGHT, DOWN, LEFT]
@@ -287,78 +260,6 @@ function draw() {
         // 내부코드는 여기까지
     }
     grid = nextGrid;
-
-    // noLoop();
-
-    // const nextGrid = [];
-    // for (let j = 0; j < DIM; j++) {
-    //     for (let i = 0; i < DIM; i++) {
-    //         let index = i + j * DIM;
-    //         if (grid[index].collapsed) {
-    //             nextGrid[index] = grid[index];
-    //         } else {
-    //             let options = new Array(tiles.length).fill(0).map((x, i) => i);
-    //             // 기존 코드
-    //             // LOOK UP
-    //             if (j > 0) {
-    //                 let up = grid[i + (j - 1) * DIM];
-    //                 let validOptions = new Array(tiles.length).fill(false);
-    //                 for (let option of up.options) {
-    //                     let valid = tiles[option].down;
-    //                     // validOptions = validOptions.concat(valid);
-    //                     for (let k = 0; k < tiles.length; k++) {
-    //                         validOptions[valid[k]] = true;
-    //                     }
-    //                 }
-    //                 checkValid(options, validOptions);
-    //             }
-    //             // LOOK RIGHT
-    //             if (i < DIM - 1) {
-    //                 let right = grid[i + 1 + j * DIM];
-    //                 let validOptions = new Array(tiles.length).fill(false);
-    //                 for (let option of right.options) {
-    //                     let valid = tiles[option].left;
-    //                     // validOptions = validOptions.concat(valid);
-    //                     for (let k = 0; k < tiles.length; k++) {
-    //                         validOptions[valid[k]] = true;
-    //                     }
-    //                 }
-    //                 checkValid(options, validOptions);
-    //             }
-    //             // LOOK DOWN
-    //             if (j < DIM - 1) {
-    //                 let down = grid[i + (j + 1) * DIM];
-    //                 let validOptions = new Array(tiles.length).fill(false);
-    //                 for (let option of down.options) {
-    //                     let valid = tiles[option].up;
-    //                     // validOptions = validOptions.concat(valid);
-    //                     for (let k = 0; k < tiles.length; k++) {
-    //                         validOptions[valid[k]] = true;
-    //                     }
-    //                 }
-    //                 checkValid(options, validOptions);
-    //             }
-    //             // LOOK LEFT
-    //             if (i > 0) {
-    //                 let left = grid[i - 1 + j * DIM];
-    //                 let validOptions = new Array(tiles.length).fill(false);
-    //                 for (let option of left.options) {
-    //                     let valid = tiles[option].right;
-    //                     // validOptions = validOptions.concat(valid);
-    //                     for (let k = 0; k < tiles.length; k++) {
-    //                         validOptions[valid[k]] = true;
-    //                     }
-    //                 }
-    //                 checkValid(options, validOptions);
-    //             }
-    //
-    //             nextGrid[index] = new Cell(options);
-    //             // 각각의 셀이 자신의 인덱스를 포함함, 예전 자신의 위치를 가져오면 그걸 넣는것도 좋다.
-    //             nextGrid[index].setPos(parseInt(index % DIM), parseInt(index / DIM));
-    //         }
-    //     }
-    // }
-    // grid = nextGrid;
 
     // noLoop();
 }
