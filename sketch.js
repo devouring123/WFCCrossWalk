@@ -191,9 +191,9 @@ function draw() {
 
         errorCnt++;
         console.log(errorCnt);
-        if(errorCnt >= 100) {
+        if (errorCnt >= 100) {
             noLoop();
-            console.log("totalCnt : " , totalCnt);
+            console.log("totalCnt : ", totalCnt);
         }
 
         startOver();
@@ -208,19 +208,19 @@ function draw() {
     // 다음번 그리드 갱신하는 함수
     const nextGrid = grid.slice();
     const toVisit = [];
+
     for (let j = 0; j < DIM; j++) {
         for (let i = 0; i < DIM; i++) {
             for (let dir = 0; dir < 4; dir++) {
                 let pos = [i + dx[dir], j + dy[dir]];
                 let index = pos[0] + pos[1] * DIM;
-                if (isInGrid(pos) && !nextGrid[index].collapsed && !toVisit[index]) {
+                if (isInGrid(pos) && !nextGrid[index].collapsed && !toVisit.includes(index)) {
                     toVisit.push(index);
                 }
             }
         }
     }
 
-    // console.log(tiles);
 
     for (let i = 0; i < toVisit.length; i++) {
         let cur = nextGrid[toVisit[i]];
@@ -258,6 +258,7 @@ function draw() {
         // 각각의 셀이 자신의 인덱스를 포함함, 예전 자신의 위치를 가져오면 그걸 넣는것도 좋다.
         nextGrid[curIndex].setPos(curPos);
         // 내부코드는 여기까지
+
     }
     grid = nextGrid;
 
